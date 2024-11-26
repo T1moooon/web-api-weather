@@ -1,8 +1,9 @@
 import requests
+from urllib.parse import urljoin
 
 
 def main():
-    url_template = "https://wttr.in/{}"
+    base_url = "https://wttr.in/"
     locations = ['Череповец', 'Лондон', 'SVO']
     params = {
         'M': '',
@@ -12,7 +13,7 @@ def main():
         'lang': 'ru'
     }
     for location in locations: 
-        url = url_template.format(location)
+        url = urljoin(base_url, location)
         response = requests.get(url, params=params)
         response.raise_for_status()
         print(response.text)
